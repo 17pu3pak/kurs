@@ -2,6 +2,14 @@
 #include <iostream>
 #include "stdio.h"
 
+void operator+(int _element,IntArray& intarray){
+    intarray.AddL(_element);
+    return;
+  };
+void operator+(IntArray& intarray,int _element){
+    intarray.AddH(_element);
+    return;
+  };
   IntArray::IntArray(){
       head = new el;
     head->index = 1;
@@ -167,12 +175,4 @@ void IntArray::AddH(int _element){
     tail=tempel;
   }
 
-  };
-void operator+(int _element,IntArray& intarray){
-    intarray.AddL(_element);
-    return;
-  };
-void operator+(IntArray& intarray,int _element){
-    intarray.AddH(_element);
-    return;
   };

@@ -21,10 +21,11 @@ int main(){
   std::cout <<"a. High = "<< a.High() << std::endl;
   std::cout <<"a. Low = "<< a.Low() << std::endl;
   std::cout <<"a. size = "<< a.Size() << std::endl;
-  IntArray c(a); // TODO: фикс деструктора
+  //IntArray c(a); // TODO: фикс деструктора
   IntArray d(-3, 3, 10);
 
-  //b+123;
+  a+123;
+  std::cout << "A.last = " <<  a.Fetch(3) << std::endl;
 /*
 
 //TODO: a+123;

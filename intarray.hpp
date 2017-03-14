@@ -30,3 +30,5 @@ private:
   int lowBound;
   int highBound;
 };
+void operator+(IntArray& intarray,int _element);
+void operator+(int _element,IntArray& intarray);
