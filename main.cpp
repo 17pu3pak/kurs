@@ -26,6 +26,7 @@ int main(){
 
   //b+123;
 /*
+dsdsf
 //TODO: a+123;
  std::cout <<"a. Store 2 = "<< a.Fetch(2) << std::endl;
 
