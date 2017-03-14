@@ -18,7 +18,6 @@ public:
   int operator--();
   ~IntArray();
 
-
 private:
   struct el{
     int element;
@@ -26,9 +25,9 @@ private:
     el *prev,*next;
   };
   el *head,*tail;
-
   int lowBound;
   int highBound;
 };
+
 void operator+(IntArray& intarray,int _element);
 void operator+(int _element,IntArray& intarray);
