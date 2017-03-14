@@ -5,6 +5,7 @@
 int main(){
   IntArray a;
   IntArray b(-1);
+  IntArray d(-3, 3, 10);
   int i = 10;
     a[1]=1;
     i=25+a[1];
@@ -17,11 +18,11 @@ int main(){
   std::cout <<"a. Store 10 = "<< a.Fetch(10) << std::endl;
    std::cout <<"a. --a = "<< --a << std::endl;
       std::cout <<"a. a-- = "<< a-- << std::endl;
-
-  std::cout <<"a. High = "<< a.High() << std::endl;
+      std::cout << "d[-1]" << d[-1]<<std::endl;
+        std::cout <<"a. High = "<< a.High() << std::endl;
   std::cout <<"a. Low = "<< a.Low() << std::endl;
   std::cout <<"a. size = "<< a.Size() << std::endl;
-  IntArray d(-3, 3, 10);
+
 
      a+123;
      a+11;

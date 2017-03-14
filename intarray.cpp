@@ -158,6 +158,7 @@ void IntArray::Store(int index,int _element) {
 int& IntArray::operator[](int index){
         struct el *tempel;
         tempel = head;
+        //if(index>highBound || index<lowBound) return error;
         while (tempel->index != index) {
                 tempel=tempel->next;
         }
