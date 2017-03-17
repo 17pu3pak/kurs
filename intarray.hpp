@@ -17,7 +17,7 @@ public:
   int operator--(int);
   int operator--();
   ~IntArray();
-
+  class ArrayEmpty{};
 private:
   struct el{
     int element;

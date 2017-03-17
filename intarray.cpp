@@ -1,10 +1,11 @@
 #include "intarray.hpp"
-#define NULL 0
+#include <iostream>
+//#define NULL 0
 
-int abs(int inp){
-  if(inp<0) return -inp;
-  else return inp;
-}
+// int abs(int inp){
+//   if(inp<0) return -inp;
+//   else return inp;
+// }
 
 void operator+(int _element,IntArray& intarray){
         intarray.AddL(_element);
@@ -200,20 +201,33 @@ void IntArray::AddL(int _element){
 
 int IntArray::RemH(){
         struct el *tempel;
-        highBound-=1;
-        if(highBound<=lowBound) return 0;
+        try {
+        if(highBound-1<=lowBound) throw ArrayEmpty();
         tempel= tail;
         tail=tempel->prev;
+        highBound-=1;
         return tempel->element;
+      }
+      catch(IntArray::ArrayEmpty){
+        std::cout << "Error while getting element from array. Possibly array is empty" << std::endl;
+      }
+return 0;
+
 
 };
 int IntArray::RemL(){
         struct el *tempel;
-        lowBound+=1;
-        if(lowBound>=highBound) return 0;
+        try{
+        if(lowBound+1>=highBound) throw ArrayEmpty();
         tempel= head;
         head=tempel->next;
+        lowBound+=1;
         return tempel->element;
+      }
+      catch(IntArray::ArrayEmpty){
+        std::cout << "Error while getting element from array. Possibly array is empty" << std::endl;
+      }
+return 0;
 };
 
 int IntArray::operator--(int){
