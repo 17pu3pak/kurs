@@ -17,7 +17,7 @@ void operator+(IntArray& intarray,int _element){
         return;
 };
 
-IntArray::IntArray(){
+IntArray::IntArray() {
         head = new el;
         tail = new el;
         head->index = 1;
@@ -31,7 +31,6 @@ IntArray::IntArray(){
         tail->next=NULL;
         lowBound=1;
         highBound = 1;
-
 };
 
 IntArray::IntArray(int lb){
@@ -133,6 +132,7 @@ int IntArray::Fetch(int index){
         tempel = head;
         while(tempel->index != index) {
                 if(tempel->next == NULL) {
+                  std::cout << "Returning last element. Not you asked for" << std::endl;
                         return tempel->element;
                 }
                 else {
@@ -147,13 +147,22 @@ void IntArray::Store(int index,int _element) {
         tempel = head;
         while(tempel->index != index) {
                 if(tempel->next == NULL) {
-                        tempel->element=_element;
+                      //  tempel->element=_element;
+                      break;
                 }
                 else{
                         tempel=tempel->next;
                 }
         }
+        if((head->index == index)&&
+            (head->index == tail->index)&&
+           (head->element == tail->element)) {
+             head->element = _element;
+             tail->element = _element;
+             return;
+           }
         tempel->element= _element;
+        return;
 };
 
 int& IntArray::operator[](int index){
@@ -173,6 +182,10 @@ void IntArray::AddH(int _element){
         if(tail->index==head->index) {
                 tail->index=highBound;
                 tail->element = _element;
+                head->next = tail;
+                head->prev= NULL;
+                tail->prev=head;
+                tail->next= NULL;
         }else{
                 tempel->prev = tail;
                 tempel->next = NULL;
@@ -202,32 +215,57 @@ void IntArray::AddL(int _element){
 int IntArray::RemH(){
         struct el *tempel;
         try {
-        if(highBound-1<=lowBound) throw ArrayEmpty();
-        tempel= tail;
-        tail=tempel->prev;
-        highBound-=1;
-        return tempel->element;
-      }
-      catch(IntArray::ArrayEmpty){
-        std::cout << "Error while getting element from array. Possibly array is empty" << std::endl;
-      }
-return 0;
+                if(highBound-1<lowBound) throw ArrayEmpty();
+                tempel= tail;
+                if(tempel->prev == head){
+                  int ret = tail->element;
+                  tail->prev=head;
+                  tail->element = head->element;
+                  tail->index=head->index;
+                  tail->next=NULL;
+                  highBound-=1;
+                  return ret;
+                }
+                else{
+                  tail=tempel->prev;
+                }
+                tail->next = NULL;
+                highBound-=1;
+                return tempel->element;
+        }
+        catch(IntArray::ArrayEmpty) {
+                std::cout << "Error while getting element from array with RemH function. Possibly array is empty or keep 1 element" << std::endl;
+        }
+        return 0;
 
 
 };
 int IntArray::RemL(){
         struct el *tempel;
         try{
-        if(lowBound+1>=highBound) throw ArrayEmpty();
-        tempel= head;
-        head=tempel->next;
-        lowBound+=1;
-        return tempel->element;
-      }
-      catch(IntArray::ArrayEmpty){
-        std::cout << "Error while getting element from array. Possibly array is empty" << std::endl;
-      }
-return 0;
+                if(lowBound+1>highBound) throw ArrayEmpty();
+                tempel= head;
+                if(tempel->next == tail){
+                  int ret = head->element;
+                  head->next = tail;
+                  head->element = tail->element;
+                  head->index = tail->index;
+                  head->prev=NULL;
+                  lowBound+=1;
+                  return ret;
+                }
+                else{
+                  head=tempel->next;
+                }
+
+                head->prev = NULL;
+                lowBound+=1;
+                return tempel->element;
+        }
+        catch(IntArray::ArrayEmpty) {
+                std::cout << "Error while getting element from array with RemL function. Possibly array is empty or keep 1 element" << std::endl;
+        }
+        return 0;
 };
 
 int IntArray::operator--(int){
@@ -253,3 +291,29 @@ IntArray::~IntArray(){
         }
         delete tempel;
 };
+
+// void IntArray::showArrayInfo(){
+//   std::cout << "Head addr = " << head << std::endl;
+//   std::cout << "Head prev = " << head->prev << std::endl;
+//   std::cout << "Head next = " << head->next << std::endl;
+//   std::cout << "Head element = " << head->element << std::endl;
+//   std::cout << "Head index = " << head->index << std::endl;
+//   std::cout <<"TAIL" <<std::endl;
+//   std::cout << "tail addr = " << tail << std::endl;
+//   std::cout << "tail prev = " << tail->prev << std::endl;
+//   std::cout << "tail next = " << tail->next << std::endl;
+//   std::cout << "tail element = " << tail->element << std::endl;
+//   std::cout << "tail index = " << tail->index << std::endl;
+//   struct el *tempel = new el;
+//   tempel = head;
+//   while(tempel != NULL){
+//     std::cout <<"TEMPEL" <<std::endl;
+//     std::cout << "tempel addr = " << tempel << std::endl;
+//     std::cout << "tempel prev = " << tempel->prev << std::endl;
+//     std::cout << "tempel next = " << tempel->next << std::endl;
+//     std::cout << "tempel element = " << tempel->element << std::endl;
+//     std::cout << "tempel index = " << tempel->index << std::endl;
+//     tempel=tempel->next;
+//   }
+//
+// }
